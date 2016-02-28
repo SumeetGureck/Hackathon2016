@@ -3,6 +3,7 @@ package com.infy.codejam;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.infy.utilities.ToLog;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -13,11 +14,11 @@ public class MockupData {
 	  public static void main(String[] args) {
 		 
 		//To remove console warnings from mongo
-	 		Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
+	 	Logger mongoLogger = Logger.getLogger( "org.mongodb.driver" );
   	    mongoLogger.setLevel(Level.SEVERE); 
   	    
   	   //Connecting to Mongo DB
-  	  Mongo mongo = new Mongo("127.0.0.1", 27017);//Server URL & Port
+  	    Mongo mongo = new Mongo("127.0.0.1", 27017);//Server URL & Port
   		DB db = mongo.getDB("rtl"); //DB name
   		
   		// get a single collection
@@ -25,10 +26,7 @@ public class MockupData {
   		
 			 try{   
 				 		
-			          
-			         
 			    		BasicDBObject document = new BasicDBObject();
-			    					    		
 			    		
 			    		int brand=2;
 			    		int market=1;
@@ -42,7 +40,6 @@ public class MockupData {
 			    		
 			    		
 			    		while( style<style2 || sku1 <sku2 ){
-			    			
 			    			
 			    		//SKU1	
 			    	document.clear();
@@ -124,13 +121,9 @@ public class MockupData {
 			    		document.put("promo", "0");
 			    	collection.insert(document);
 			  
-			    	
-			    	////
 			    	style++;
 			    	
 			    		}
-
-			    	
 			 }
 			 catch(Exception e){
 			     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -140,8 +133,7 @@ public class MockupData {
 				 mongo.close();
 			 }
 			
-			
-			System.out.println("DONE");
+			 ToLog.logData("DONE");
 			
 		} 
 

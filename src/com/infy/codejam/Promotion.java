@@ -1,5 +1,6 @@
 package com.infy.codejam;
 
+import com.infy.utilities.*;
 import com.mongodb.DBCursor;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -20,14 +21,6 @@ import java.util.logging.Logger;
 public class Promotion {
 	
 	public Map<String,HashSet<String>> promoCached;
-	
-	
-/*	public static void main(String args[]){
-		Promotion p=new Promotion();
-		p.cachePromos();
-	}
-	*/
-	
 	
 	public void cachePromos(){
 		
@@ -90,24 +83,26 @@ public class Promotion {
 				String promoLevelkey=b+mkt+z+l+div+dept;
 				
 				if (!promoCached.containsKey(promoLevelkey)){
-					//System.out.println("first entry");
-					 tmp=new HashSet<String>();
+					
+					tmp=new HashSet<String>();
 					tmp.add(m.get("type").toString()+m.get("value").toString());
 					promoCached.put(promoLevelkey, (HashSet<String>) tmp);
-					//System.out.println(promoLevelkey);
+					
 					continue;
 				}
 				
 				 tmp=new HashSet<String>();
 				 tmp=promoCached.get(promoLevelkey);			
 				 tmp.add(m.get("type").toString()+m.get("value").toString());
-				promoCached.put(promoLevelkey, (HashSet<String>) tmp);
+				 promoCached.put(promoLevelkey, (HashSet<String>) tmp);
 				
 				
     	  }//end of while
+    	  
     	  long d2=System.currentTimeMillis();
-    	  System.out.println("Caching of Promos took : "+ (d2-d1) + " ms ");
-    	  System.out.println("------------------------------------------------------------------------ \n");
+    	  
+    	  ToLog.logData("Caching of Promos took : "+ (d2-d1) + " ms ");
+    	  ToLog.logData("------------------------------------------------------------------------ \n");
     	 
 		}
 		 catch(Exception e){
@@ -115,6 +110,14 @@ public class Promotion {
 		     e.printStackTrace();
 		  }
 	}
+	
+	
+/*	public static void main(String args[]){
+		Promotion p=new Promotion();
+		p.cachePromos();
+	}
+	*/
+	
 
 }
 
@@ -127,13 +130,12 @@ public class Promotion {
 
     public Node(String value)
     {
-        this.children = new ArrayList<>();
-        this.value = value;
+        
     }
 
     public void addChild(Node child)
     {
-        children.add(child);
+        
     }
 
 }*/

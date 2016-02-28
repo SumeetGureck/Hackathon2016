@@ -6,6 +6,7 @@ package com.infy.TestPromoEngine;
 import static org.junit.Assert.*;
 
 import com.infy.codejam.*;
+import com.infy.utilities.ToLog;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public class Basket1 {
 		Map<String,String> basket=new HashMap<String,String>();
 		Map<String,String> bestPrice=new HashMap<String,String>();
 		bestPrice=basket;
+		
 		//Load SKUs
 		basket.put("2000000010", "1111");
 		basket.put("2000000020", "1111");
@@ -47,29 +49,29 @@ public class Basket1 {
 		basket.put("2999000611", "1112");
 
 		
-	
-		
 		//Cache SKU
-		ItemData itmCache =new ItemData();
-		itmCache.cacheItems();
+			ItemData itmCache =new ItemData();
+			itmCache.cacheItems();
 		
 		//Cache Promos
-		Promotion promoCache=new Promotion();
-		promoCache.cachePromos();
+			Promotion promoCache=new Promotion();
+			promoCache.cachePromos();
 		
 		//Cache Location
-		LocationCache locCache=new LocationCache();
-		locCache.cacheLocations();
+			LocationCache locCache=new LocationCache();
+			locCache.cacheLocations();
 		
-		//Start Tracking Execution Time Post Caching
-		 long startTime=System.currentTimeMillis();
+		//**Start Tracking Execution Time Post Caching
+			long startTime=System.currentTimeMillis();
+			
 		//Form SKU Hierarchy
+			Set<Entry<String,String>> entries = basket.entrySet();
 		
-		Set<Entry<String,String>> entries = basket.entrySet();
 		// parse the set
-		Iterator<Entry<String,String>> it = entries.iterator();
+			Iterator<Entry<String,String>> it = entries.iterator();
 		
 		long endTime=0;
+		
 		while(it.hasNext()) {
 		    Entry<String,String> e = it.next();
 		    String skuNumber   = e.getKey();
@@ -78,13 +80,13 @@ public class Basket1 {
 		    
 		    //Get zone details for SKU 
 		    String[] locDetails=locCache.locCached.get(skuLocationBasket);
-		    System.out.println("\n\t SKU : "+skuNumber);
+		    ToLog.logData("\n\t SKU : "+skuNumber);
 		    if(itmCache.itemCached.containsKey(skuNumber)){
 		    	skuDetailsFromCache=itmCache.itemCached.get(skuNumber);
 		    }
 		     else {
 		    	 
-		    	 System.out.println("\t SKU does not exist in Master Item");
+		    	 ToLog.logData("\t SKU does not exist in Master Item");
 		    	 continue;
 		    	 
 		     }
@@ -101,10 +103,7 @@ public class Basket1 {
 		    	//Append division & department
 		    	skuHierarchy.append(skuDetailsFromCache.substring(2, 9));
 		    	
-		    	//System.out.println("Starting promo match for hierarchy :"+ skuHierarchy);
-		    	
-		    	
-		    //Get All eligible promoDetails-------
+		    	//Get All eligible promoDetails-------
 		    	
 		    	Set promoSet=new HashSet<String>();
 		    	//Set tmp=new HashSet<String>();
@@ -153,14 +152,12 @@ public class Basket1 {
 		            BigDecimal promoValue= new BigDecimal(promoTemp.substring(1, promoTemp.length()));
 		            
 		            //For currency calculation
-		           System.out.println("\t\t Type : "+promoType+" , Value : "+promoValue);
+		            ToLog.logData("\t\t Type : "+promoType+" , Value : "+promoValue);
 		            
-		            //System.out.println(mrp.subtract(promoValue).compareTo(finalSellingPrice));
 		            //Amount Off Promo Calculations
 		            if(promoType==1){
 		            	if(mrp.subtract(promoValue).compareTo(finalSellingPrice) == -1 ){
 			            	finalSellingPrice=mrp.subtract(promoValue);
-			            	//System.out.println("\t\tType 1:"+finalSellingPrice);
 			            }
 		            	
 		            }
@@ -170,21 +167,20 @@ public class Basket1 {
 		      
 		            	if(mrp.subtract(((promoValue.divide(new BigDecimal(100.0))).multiply(mrp))).compareTo(finalSellingPrice) == -1 ){
 		            		finalSellingPrice=mrp.subtract(((promoValue.divide(new BigDecimal(100.0))).multiply(mrp)));
-		            	  //	System.out.println("\t\tType 2:"+finalSellingPrice);
 		            	}
 		            }
 		            
 		            
 		        }
-		        	System.out.println("\t Best Price for SKU : "+skuNumber+" is = "+finalSellingPrice+" INR, Initial Price was : "+mrp+" INR\n");
+		        ToLog.logData("\t Best Price for SKU : "+skuNumber+" is = "+finalSellingPrice+" INR, Initial Price was : "+mrp+" INR\n");
 		        	
 		        	 endTime=System.currentTimeMillis();
 		        	
 		        	
 		}//end of While for single SKU promotion calc
-		 System.out.println("------------------------------------------------------------------------ \n");
+		ToLog.logData("------------------------------------------------------------------------ \n");
     	 
-    	 System.out.println("BEST PROMO IDENTIFICATION FOR "+basket.size()+" SKUs processes in : "+(endTime-startTime)+"ms");
+		ToLog.logData("BEST PROMO IDENTIFICATION FOR "+basket.size()+" SKUs processes in : "+(endTime-startTime)+"ms");
 
 		
 	}

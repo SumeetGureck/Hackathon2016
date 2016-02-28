@@ -3,6 +3,7 @@ package com.infy.codejam;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.infy.utilities.ToLog;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -25,11 +26,7 @@ public class MockupPromosData {
   		
 			 try{   
 				 		
-			          
-			         
 			    		BasicDBObject document = new BasicDBObject();
-			    					    		
-			    		    	
 			    	
 			    		int sku1=2000720000;  //2000400501
 			    		int sku2=2001010000;
@@ -61,11 +58,7 @@ public class MockupPromosData {
 			    		
 			    	collection.insert(document);
 	
-			    	////
-			    	
 			    		}
-
-			    	
 			 }
 			 catch(Exception e){
 			     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -75,8 +68,7 @@ public class MockupPromosData {
 				 mongo.close();
 			 }
 			
-			
-			System.out.println("DONE");
+			 ToLog.logData("DONE");
 			
 		} 
 

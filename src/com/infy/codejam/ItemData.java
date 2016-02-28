@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.infy.utilities.ToLog;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -30,7 +31,7 @@ public class ItemData {
 			
 			// get a single collection
 			DBCollection coll = db.getCollection("sku");
-	        System.out.println("Starting caching of SKUs");
+			ToLog.logData("Starting caching of SKUs");
 	     
 	        BasicDBObject searchQuery = new BasicDBObject();
 	    	//searchQuery.put("brand", brand);
@@ -62,8 +63,8 @@ public class ItemData {
 	    	  
 	    	  long d2=System.currentTimeMillis();
 	    	  mongo.close();
-	    	  System.out.println("Caching of Items took : "+ (d2-d1) + " ms for "+itemCached.size()+" SKUs ");
-	    	  System.out.println("------------------------------------------------------------------------ \n");
+	    	  ToLog.logData("Caching of Items took : "+ (d2-d1) + " ms for "+itemCached.size()+" SKUs ");
+	    	  ToLog.logData("------------------------------------------------------------------------ \n");
 	    	  
 		//	System.out.println(itemCached.get("2000005978"));
 	    	  
@@ -77,11 +78,10 @@ public class ItemData {
 			
 			
 		}
-	public static void main(String args[]) {
-		// TODO Auto-generated method stub
-ItemData l=new ItemData();
-l.cacheItems();
+/*	public static void main(String args[]) {
+		ItemData l=new ItemData();
+		l.cacheItems();
 
-	}
+	}*/
 }
                                                                      

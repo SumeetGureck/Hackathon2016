@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.infy.utilities.ToLog;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -15,10 +16,11 @@ import com.mongodb.Mongo;
 
 public class LocationCache {
 	Mongo mongo;
-	public String[] locVal;
-  	public String loc;
-  	
+	
+	 String[] locVal;
+  	 String loc;
   	public Map<String,String[]> locCached;
+  	
 	public void cacheLocations(){
 		
 		
@@ -33,7 +35,7 @@ public class LocationCache {
 			
 			// get a single collection
 			DBCollection coll = db.getCollection("loc");
-	        System.out.println("Starting caching of Location Details");
+			ToLog.logData("Starting caching of Location Details");
 	     
 	        BasicDBObject searchQuery = new BasicDBObject();
 	   
@@ -57,18 +59,18 @@ public class LocationCache {
 					locVal[0]=m.get("brand").toString();
 					locVal[1]=m.get("market").toString();
 					locVal[2]=m.get("zone").toString();
-    				 locCached.put(loc, locVal);
+    				locCached.put(loc, locVal);
 					
 					
 	    	  }//end of while
 	    	  long d2=System.currentTimeMillis();
 	    	  mongo.close();
-	    	  System.out.println("Caching of Locations took : "+ (d2-d1) + " ms ");
-	    	  System.out.println("------------------------------------------------------------------------");
+	    	  ToLog.logData("Caching of Locations took : "+ (d2-d1) + " ms ");
+	    	  ToLog.logData("------------------------------------------------------------------------");
 			}
 			 catch(Exception e){
 				 
-			     System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+				 ToLog.logData( e.getClass().getName() + ": " + e.getMessage() );
 			     e.printStackTrace();
 			  }
 			finally{
@@ -78,9 +80,8 @@ public class LocationCache {
 		}
 	
 /*	public static void main(String args[]) {
-		// TODO Auto-generated method stub
-LocationCache l=new LocationCache();
-l.cacheLocations();
+		LocationCache l=new LocationCache();
+		l.cacheLocations();
 	}*/
 }
                                                                      
