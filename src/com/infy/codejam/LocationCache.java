@@ -57,7 +57,7 @@ public class LocationCache {
 				locVal[2] = m.get("zone").toString();
 				locCached.put(loc, locVal);
 
-			}// end of while
+			}
 			long d2 = System.currentTimeMillis();
 			mongo.close();
 			ToLog.logData("Caching of Locations took : " + (d2 - d1) + " ms ");

@@ -32,8 +32,6 @@ public class ItemData {
 			ToLog.logData("Starting caching of SKUs");
 
 			BasicDBObject searchQuery = new BasicDBObject();
-			// searchQuery.put("brand", brand);
-			// DBCursor cursor = coll.find(searchQuery);
 
 			DBCursor cursor = coll.find();
 
@@ -44,7 +42,6 @@ public class ItemData {
 
 			while (cursor.hasNext()) {
 
-				// System.out.println("loop");
 				String tStr = "";
 				itemObj = (BasicDBObject) cursor.next();
 				Map m = new HashMap<>();
@@ -56,15 +53,13 @@ public class ItemData {
 
 				itemCached.put(skuTemp, skuDetail);
 
-			}// end of while
+			}
 
 			long d2 = System.currentTimeMillis();
 			mongo.close();
 			ToLog.logData("Caching of Items took : " + (d2 - d1) + " ms for "
 					+ itemCached.size() + " SKUs ");
 			ToLog.logData("------------------------------------------------------------------------ \n");
-
-			// System.out.println(itemCached.get("2000005978"));
 
 			mongo.close();
 

@@ -103,10 +103,9 @@ public class Basket1 {
 			// Append division & department
 			skuHierarchy.append(skuDetailsFromCache.substring(2, 9));
 
-			// Get All eligible promoDetails-------
-
+			
+			// ****** Get All eligible promoDetails *************
 			Set promoSet = new HashSet<String>();
-			// Set tmp=new HashSet<String>();
 
 			// Get All eligible Promos for SKU only
 			if (skuHierarchy.length() > 14
@@ -150,7 +149,6 @@ public class Basket1 {
 				promoSet.addAll(promoCache.promoCached.get(skuHierarchy
 						.substring(0, 3)));
 
-			// BigDecimal mrpNew = new BigDecimal(mrp);
 			BigDecimal finalSellingPrice = mrp;
 			Iterator<String> itr2 = promoSet.iterator();
 			while (itr2.hasNext()) {
@@ -172,7 +170,7 @@ public class Basket1 {
 
 				}
 
-				// Amount Off Promo Calculations
+				// Percentage Off Promo Calculations
 				else if (promoType == 2) {
 
 					if (mrp.subtract(
