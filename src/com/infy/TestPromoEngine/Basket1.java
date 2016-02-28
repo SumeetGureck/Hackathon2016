@@ -66,7 +66,8 @@ public class Basket1 {
 		// Form SKU Hierarchy
 		Set<Entry<String, String>> entries = basket.entrySet();
 
-		// parse the set
+		// Traversing the Items in Basket
+		
 		Iterator<Entry<String, String>> it = entries.iterator();
 
 		long endTime = 0;
@@ -94,8 +95,7 @@ public class Basket1 {
 
 			// Create SKU hierarchy
 			// Add Brand & Market details
-			StringBuffer skuHierarchy = new StringBuffer(
-					skuDetailsFromCache.substring(0, 2));
+			StringBuffer skuHierarchy = new StringBuffer(skuDetailsFromCache.substring(0, 2));
 			// Append Zone detail
 			skuHierarchy.append(locDetails[2]);
 			// Append Location
@@ -127,8 +127,7 @@ public class Basket1 {
 					&& promoCache.promoCached.containsKey(skuHierarchy
 							.substring(0, 10))) {
 
-				promoSet.addAll(promoCache.promoCached.get(skuHierarchy
-						.substring(0, 10)));
+				promoSet.addAll(promoCache.promoCached.get(skuHierarchy.substring(0, 10)));
 
 			}
 
@@ -137,8 +136,7 @@ public class Basket1 {
 					&& promoCache.promoCached.containsKey(skuHierarchy
 							.substring(0, 7))) {
 
-				promoSet.addAll(promoCache.promoCached.get(skuHierarchy
-						.substring(0, 7)));
+				promoSet.addAll(promoCache.promoCached.get(skuHierarchy.substring(0, 7)));
 
 			}
 

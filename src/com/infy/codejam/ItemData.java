@@ -16,6 +16,17 @@ public class ItemData {
 
 	public Map<String, String> itemCached;
 
+	
+	/**
+	* The cacheItems function will load all SKUs from Mongo Collection
+	*  and hold the required sku hierarchy related data in a HashMap
+	* 
+	* Map<String, String> : <SKU#, SKU Hierarchy>
+	*
+	* @author  Sumeet Gureck
+	* @version 1.0
+	* @since   2016-02-27 
+	*/
 	public void cacheItems() {
 
 		try {
@@ -57,8 +68,7 @@ public class ItemData {
 
 			long d2 = System.currentTimeMillis();
 			mongo.close();
-			ToLog.logData("Caching of Items took : " + (d2 - d1) + " ms for "
-					+ itemCached.size() + " SKUs ");
+			ToLog.logData("Caching of Items took : " + (d2 - d1) + " ms for "+ itemCached.size() + " SKUs ");
 			ToLog.logData("------------------------------------------------------------------------ \n");
 
 			mongo.close();

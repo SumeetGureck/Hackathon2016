@@ -18,6 +18,16 @@ public class Promotion {
 
 	public Map<String, HashSet<String>> promoCached;
 
+	/**
+	* The cachePromos function will load all promotions from Mongo 
+	* Collection and hold the required promo related data in a HashMap
+	* 
+	* Map<String, HashSet<String>> : <Promo hierarchy, Promo's available >
+	*
+	* @author  Sumeet Gureck
+	* @version 1.0
+	* @since   2016-02-27 
+	*/
 	public void cachePromos() {
 
 		try {

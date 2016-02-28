@@ -19,6 +19,17 @@ public class LocationCache {
 	String loc;
 	public Map<String, String[]> locCached;
 
+	/**
+	* The cacheLocations function will load all locations from Mongo 
+	* Collection and hold the required Location hierarchy related data 
+	* in a HashMap.
+	* 
+	* Map<String, String[]> : <Location/Store , {Brand,Market,Zone}>
+	*
+	* @author  Sumeet Gureck
+	* @version 1.0
+	* @since   2016-02-27 
+	*/
 	public void cacheLocations() {
 
 		try {
