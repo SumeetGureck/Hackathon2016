@@ -26,7 +26,7 @@ public class LocationCache {
 	* 
 	* Map<String, String[]> : <Location/Store , {Brand,Market,Zone}>
 	*
-	* @author  Sumeet Gureck
+	* @author  Retail Wiz
 	* @version 1.0
 	* @since   2016-02-27 
 	*/

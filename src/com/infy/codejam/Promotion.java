@@ -24,7 +24,7 @@ public class Promotion {
 	* 
 	* Map<String, HashSet<String>> : <Promo hierarchy, Promo's available >
 	*
-	* @author  Sumeet Gureck
+	* @author  Retail Wiz
 	* @version 1.0
 	* @since   2016-02-27 
 	*/

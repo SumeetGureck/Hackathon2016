@@ -19,9 +19,14 @@ import com.infy.codejam.Promotion;
 import com.infy.utilities.ToLog;
 
 /**
- * @author Sumeet Gureck
- *
- */
+* The Basket1 function will hold the input data to test promotion
+* function and call caching functions before applying promos.
+* 
+*
+* @author  Retail Wiz
+* @version 1.0
+* @since   2016-02-27 
+*/
 public class Basket1 {
 
 	@Test

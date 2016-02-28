@@ -23,7 +23,7 @@ public class ItemData {
 	* 
 	* Map<String, String> : <SKU#, SKU Hierarchy>
 	*
-	* @author  Sumeet Gureck
+	* @author  Retail Wiz
 	* @version 1.0
 	* @since   2016-02-27 
 	*/
