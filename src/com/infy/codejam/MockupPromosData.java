@@ -26,32 +26,47 @@ public class MockupPromosData {
 		try {
 
 			BasicDBObject document = new BasicDBObject();
+/*				
+200	203	206	209		212	215	218	221	224
+202	205	208	211		214	217	220	223	226
+101	101	101	101		102	102	102	102	102
+				1021	1021	1021	1021	1022
+1	2	1	2		1	2	1	2	1
+20	15	15	15		20	12	40	15	10
 
-			int sku1 = 2000720000; // 2000400501
-			int sku2 = 2001010000;
-			int style = 204000000;
 
-			int promoNum = 7200240;
-			int count = 1;
-			int end = 10000;
+*/
 
-			while (sku1 <= sku2) {
-				count++;
-
-				// SKU1
+			int promoNum1 = 215;
+			int promoNum2=217;
+			int div=102;
+			int dept=1021;
+			int type=1;
+			int value=20;
+			
+			int brand=1;
+			int market=1;
+			int zone = 2;
+			int loc = 1121;
+			
+			
+			int sku1 = 2000000011; 
+			int sku2 = 2000006000;
+			
+			while (promoNum1 <= promoNum2) {
 				document.clear();
-				document.put("pid", promoNum++);
-				document.put("brand", 1);
-				document.put("market", 1);
-				document.put("zone", 2);
-				document.put("loc", 1122);
-				document.put("div", 101);
-				document.put("dept", 1011);
-				document.put("style", style++);
+				
+				document.put("pid", promoNum1++);
+				document.put("brand", brand);
+				document.put("market", market);
+				document.put("zone", zone);
+				document.put("loc", loc);
+				document.put("div", div);
+				document.put("dept", dept);
 				document.put("sku", "");
-				document.put("color", 12);
-				document.put("type", 2);
-				document.put("value", 10);
+				document.put("color", 11);
+				document.put("type", type);
+				document.put("value", value);
 				document.put("startDate", "1-Jan-2015");
 				document.put("endDate", "1-Dec-2016");
 

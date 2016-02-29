@@ -114,10 +114,10 @@ public class Promotion {
 		}
 	}
 
-	/*
-	 * public static void main(String args[]){ Promotion p=new Promotion();
-	 * p.cachePromos(); }
-	 */
+	
+	  public static void main(String args[]){ Promotion p=new Promotion();
+	  p.cachePromos(); }
+	 
 
 }
 
