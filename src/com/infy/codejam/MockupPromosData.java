@@ -27,27 +27,25 @@ public class MockupPromosData {
 
 			BasicDBObject document = new BasicDBObject();
 /*				
-200	203	206	209		212	215	218	221	224
-202	205	208	211		214	217	220	223	226
-101	101	101	101		102	102	102	102	102
-				1021	1021	1021	1021	1022
-1	2	1	2		1	2	1	2	1
-20	15	15	15		20	12	40	15	10
-
-
+100	102	1	1	1	1111	101	1011	11	1	20
+102	104	1	1	1	1111	101	1011	11	2	10
+104	107	1	1	1	1111	101	1012	22	1	15
+108	110	1	1	1	1111	101	1012	11	2	10
+110	115	1	1	1	1111	102	1021	11	1	30
+115	119	1	1	1	1111	102	1021	22	2	12
 */
 
-			int promoNum1 = 215;
-			int promoNum2=217;
-			int div=102;
-			int dept=1021;
+			int promoNum1 = 100;
+			int promoNum2=102;
+			int div=101;
+			int dept=1011;
 			int type=1;
 			int value=20;
 			
 			int brand=1;
 			int market=1;
-			int zone = 2;
-			int loc = 1121;
+			int zone = 1;
+			int loc = 1111;
 			
 			
 			int sku1 = 2000000011; 
