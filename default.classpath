@@ -2,11 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/7h4n4705/Desktop/Hackathon/Dox/JAR/commons-io-2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/7h4n4705/Desktop/Hackathon/Dox/JAR/gson-2.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/7h4n4705/Desktop/Hackathon/Dox/JAR/json-20141113.jar"/>
-	<classpathentry kind="lib" path="C:/Users/7h4n4705/Desktop/Hackathon/Dox/JAR/mongo-java-driver-3.0.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/7h4n4705/Desktop/Hackathon/Dox/JAR/jexcelapi/jxl.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
