@@ -4,6 +4,7 @@
 package com.infy.TestPromoEngine;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -42,29 +43,31 @@ public class Basket1 {
 		basket.put("2000000021", "1211");
 		basket.put("2000012000", "1112");
 		basket.put("2000072000", "2111");
-		basket.put("2000072400", "2111");
-		basket.put("2000042000", "1211");
-		basket.put("2000012020", "1111");
-		basket.put("2000012030", "1121");
+		basket.put("2000006105", "1112");
+		basket.put("2000042000", "1221");
+		basket.put("2000012020", "2111");
+		basket.put("2000012030", "1122");
 		basket.put("2000012220", "1112");
-		basket.put("2000120200", "2111");
-		basket.put("2000120350", "2121");
-		basket.put("2000120120", "2112");
+		basket.put("2000000022", "1111");
+		basket.put("2000120350", "2111");
+		basket.put("2000120120", "2121");
 		basket.put("2000006100", "1111");
 		basket.put("2999000611", "1112");
 
+		
+	try{
 		// Cache SKU
-		ItemData itmCache = new ItemData();
-		itmCache.cacheItems();
+		Map<String, String> itmCache = ItemData.getInstance();
+		//itmCache.cacheItems();
 
 		// Cache Promos
-		Promotion promoCache = new Promotion();
-		promoCache.cachePromos();
+		Map<String, HashSet<String>> promoCache = Promotion.getInstance();
+		//promoCache.cachePromos();
 
 		// Cache Location
-		LocationCache locCache = new LocationCache();
-		locCache.cacheLocations();
-
+		Map<String, String[]>  locCache = LocationCache.getInstance();
+		//locCache.cacheLocations();
+		
 		// **Start Tracking Execution Time Post Caching
 		long startTime = System.currentTimeMillis();
 
@@ -80,14 +83,17 @@ public class Basket1 {
 		while (it.hasNext()) {
 			Entry<String, String> e = it.next();
 			String skuNumber = e.getKey();
+			ToLog.logData("\n\t SKU : " + skuNumber);
+			
 			String skuLocationBasket = e.getValue();
+			
 			String skuDetailsFromCache;
 
 			// Get zone details for SKU
-			String[] locDetails = locCache.locCached.get(skuLocationBasket);
-			ToLog.logData("\n\t SKU : " + skuNumber);
-			if (itmCache.itemCached.containsKey(skuNumber)) {
-				skuDetailsFromCache = itmCache.itemCached.get(skuNumber);
+			String[] locDetails = locCache.get(skuLocationBasket);
+						
+			if (itmCache.containsKey(skuNumber)) {
+				skuDetailsFromCache = itmCache.get(skuNumber);
 			} else {
 
 				ToLog.logData("\t SKU does not exist in Master Item");
@@ -114,42 +120,42 @@ public class Basket1 {
 
 			// Get All eligible Promos for SKU only
 			if (skuHierarchy.length() > 14
-					&& promoCache.promoCached.containsKey(skuHierarchy
+					&& promoCache.containsKey(skuHierarchy
 							+ skuNumber)) {
-				promoSet = promoCache.promoCached.get(skuHierarchy + skuNumber);
+				promoSet = promoCache.get(skuHierarchy + skuNumber);
 
 			}
 
 			// Get All eligible Promos at DEPT level
 			if (skuHierarchy.length() > 10
-					&& promoCache.promoCached.containsKey(skuHierarchy)) {
-				promoSet.addAll(promoCache.promoCached.get(skuHierarchy));
+					&& promoCache.containsKey(skuHierarchy)) {
+				promoSet.addAll(promoCache.get(skuHierarchy));
 
 			}
 
 			// Get All eligible Promos at DIVISION level
 			if (skuHierarchy.length() > 7
-					&& promoCache.promoCached.containsKey(skuHierarchy
+					&& promoCache.containsKey(skuHierarchy
 							.substring(0, 10))) {
 
-				promoSet.addAll(promoCache.promoCached.get(skuHierarchy.substring(0, 10)));
+				promoSet.addAll(promoCache.get(skuHierarchy.substring(0, 10)));
 
 			}
 
 			// Get All eligible Promos at Location level
 			if (skuHierarchy.length() > 3
-					&& promoCache.promoCached.containsKey(skuHierarchy
+					&& promoCache.containsKey(skuHierarchy
 							.substring(0, 7))) {
 
-				promoSet.addAll(promoCache.promoCached.get(skuHierarchy.substring(0, 7)));
+				promoSet.addAll(promoCache.get(skuHierarchy.substring(0, 7)));
 
 			}
 
 			// Get All eligible Promos at Zone level
 			if (skuHierarchy.length() > 2
-					&& promoCache.promoCached.containsKey(skuHierarchy
+					&& promoCache.containsKey(skuHierarchy
 							.substring(0, 3)))
-				promoSet.addAll(promoCache.promoCached.get(skuHierarchy
+				promoSet.addAll(promoCache.get(skuHierarchy
 						.substring(0, 3)));
 
 			BigDecimal finalSellingPrice = mrp;
@@ -195,8 +201,19 @@ public class Basket1 {
 		}// end of While for single SKU promotion calc
 		ToLog.logData("------------------------------------------------------------------------ \n");
 
-		ToLog.logData("BEST PROMO IDENTIFICATION FOR " + basket.size()
-				+ " SKUs processes in : " + (endTime - startTime) + "ms");
+		ToLog.logData("BEST PROMO IDENTIFIED FOR " + basket.size()
+				+ " SKUs in " + (endTime - startTime) + "ms");
+		
+}
+	catch(Exception e){
+		System.out.println("ERROR: "+e.getMessage());
+
+	}
+	finally{
+		ItemData.destroyItemCache();
+		Promotion.destroyPromoCache();
+		LocationCache.destroyLocationCache();
+	}
 
 	}
 

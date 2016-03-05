@@ -13,11 +13,30 @@ import com.mongodb.DBCursor;
 import com.mongodb.Mongo;
 
 public class LocationCache {
-	Mongo mongo;
+	static Mongo mongo;
 
-	String[] locVal;
-	String loc;
-	public Map<String, String[]> locCached;
+	static String[] locVal;
+	static String loc;
+	
+	// Map<String, String[]> locCached;
+	static  Map<String, String[]> locCached = new HashMap<String, String[]>();
+	 
+	
+	protected LocationCache() {
+	cacheLocations();
+	}
+ 
+
+	public static Map<String, String[]> getInstance() {
+		if(locCached.size()<1)
+			cacheLocations();
+		return locCached;
+	}
+	
+	public static void destroyLocationCache() {
+		locCached.clear();
+		}
+	 
 
 	/**
 	* The cacheLocations function will load all locations from Mongo 
@@ -30,8 +49,10 @@ public class LocationCache {
 	* @version 1.0
 	* @since   2016-02-27 
 	*/
-	public void cacheLocations() {
-
+	public static void cacheLocations() {
+		
+		
+		
 		try {
 			// To remove console warnings from mongo
 			Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
@@ -49,10 +70,10 @@ public class LocationCache {
 
 			DBCursor cursor = coll.find();
 
-			locCached = new HashMap<String, String[]>();
+			
 
 			long d1 = System.currentTimeMillis();
-			BasicDBObject locObj = (BasicDBObject) cursor.next();
+			BasicDBObject locObj;
 
 			while (cursor.hasNext()) {
 
@@ -67,7 +88,7 @@ public class LocationCache {
 				locVal[1] = m.get("market").toString();
 				locVal[2] = m.get("zone").toString();
 				locCached.put(loc, locVal);
-
+				
 			}
 			long d2 = System.currentTimeMillis();
 			mongo.close();

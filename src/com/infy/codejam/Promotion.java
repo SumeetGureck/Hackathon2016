@@ -16,7 +16,26 @@ import com.mongodb.Mongo;
 
 public class Promotion {
 
-	public Map<String, HashSet<String>> promoCached;
+	static  Map<String, HashSet<String>> promoCached = new HashMap<String, HashSet<String>>();
+	
+	
+	protected Promotion() {
+		cachePromos();
+		}
+	 
+
+		public static Map<String, HashSet<String>> getInstance() {
+			if(promoCached.size()<1)
+				cachePromos();
+			return promoCached;
+		}
+		
+		public static void destroyPromoCache() {
+			promoCached.clear();
+			}
+		 
+		
+		
 
 	/**
 	* The cachePromos function will load all promotions from Mongo 
@@ -28,7 +47,7 @@ public class Promotion {
 	* @version 1.0
 	* @since   2016-02-27 
 	*/
-	public void cachePromos() {
+	public static void cachePromos() {
 
 		try {
 			// To remove console warnings from mongo
@@ -52,7 +71,7 @@ public class Promotion {
 			promoCached = new HashMap<String, HashSet<String>>();
 
 			long d1 = System.currentTimeMillis();
-			BasicDBObject promoObj = (BasicDBObject) cursor.next();
+			BasicDBObject promoObj ;
 			int promoDBSize = cursor.size();
 
 			while (cursor.hasNext()) {

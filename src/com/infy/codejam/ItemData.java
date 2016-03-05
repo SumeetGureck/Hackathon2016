@@ -14,8 +14,24 @@ import com.mongodb.Mongo;
 
 public class ItemData {
 
-	public Map<String, String> itemCached;
+	static  Map<String, String> itemCached = new HashMap<String, String>();
+	
+	
+	protected ItemData() {
+		cacheItems();
+	}
+ 
 
+	public static Map<String, String> getInstance() {
+		if(itemCached.size()<1)
+			cacheItems();
+		return itemCached;
+	}
+	
+	public static void destroyItemCache() {
+		itemCached.clear();
+		}
+	
 	
 	/**
 	* The cacheItems function will load all SKUs from Mongo Collection
@@ -27,7 +43,7 @@ public class ItemData {
 	* @version 1.0
 	* @since   2016-02-27 
 	*/
-	public void cacheItems() {
+	public static void cacheItems() {
 
 		try {
 			// To remove console warnings from mongo
@@ -49,7 +65,7 @@ public class ItemData {
 			itemCached = new HashMap<String, String>();
 
 			long d1 = System.currentTimeMillis();
-			BasicDBObject itemObj = (BasicDBObject) cursor.next();
+			BasicDBObject itemObj;
 
 			while (cursor.hasNext()) {
 
@@ -68,7 +84,7 @@ public class ItemData {
 
 			long d2 = System.currentTimeMillis();
 			mongo.close();
-			ToLog.logData("Caching of Items took : " + (d2 - d1) + " ms for "+ itemCached.size() + " SKUs ");
+			ToLog.logData("Caching of Items took : " + (d2 - d1) + " ms");
 			ToLog.logData("------------------------------------------------------------------------ \n");
 
 			mongo.close();
